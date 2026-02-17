@@ -2,10 +2,10 @@
 # Project-specific targets go below the plugin section
 
 mkenv ?= .env
--include $(mkenv)
-export $(shell sed 's/=.*//' $(mkenv) 2>/dev/null)
+include $(mkenv)
+export $(shell sed 's/=.*//' $(mkenv))
 
-.PHONY: help tasks run break hold reset print-env archive
+.PHONY: help tasks run break hold reset print-env edit-env archive
 .DEFAULT_GOAL := help
 
 help: ## Show targets
@@ -35,8 +35,11 @@ reset: ## Reset all tasks to open
 	@bd ready --json 2>/dev/null | jq -r '.[].id' | xargs -I{} bd update {} --status open
 	@echo "All tasks reset to open"
 
-print-env: ## Dump environment after .env import
-	@env | sort
+print-env: ## Show vars from .env
+	@sed -n '/^[A-Za-z_][A-Za-z_0-9]*=/p' $(mkenv)
+
+edit-env: ## Edit .env
+	@$${EDITOR:-vi} $(mkenv)
 
 archive: ## Sync beads to git
 	@bd sync

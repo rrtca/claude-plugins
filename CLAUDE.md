@@ -1,3 +1,16 @@
+# STDOUT IS SACRED — DO NOT TOUCH IT
+
+When a skill or command produces stdout, that output is the ENTIRE response.
+- Do NOT repeat, reformat, summarize, or wrap stdout in code blocks
+- Do NOT add commentary, insights, or follow-up questions after stdout
+- Do NOT ask clarifying questions when the skill already says what to do
+- stdout is deterministic. LLM commentary is non-deterministic. Mixing them destroys value.
+- If the skill says "run X" — run X, show output, STOP.
+- This applies to ALL /make:* skills and any skill that produces terminal output.
+- Violating this rule makes the plugin useless. There are ZERO exceptions.
+
+---
+
 # Development Workflow
 
 This document defines the workflow for Claude Code sessions on this project.
@@ -38,7 +51,7 @@ Plans go in `docs/plans/YYYY-MM-DD-topic.md`. Keep them concise and actionable. 
 - All make invocations use `make -f .Makefile.claude <target>`
 - If no `Makefile` exists, `.Makefile.claude` creates a symlink via file target
 - Never use `test -f` in Makefiles — use file targets as dependencies instead
-- Follow the dotenv pattern: `mkenv ?= .env` / `-include $(mkenv)` / `export $(shell sed 's/=.*//' $(mkenv) 2>/dev/null)`
+- Follow the dotenv pattern: `mkenv ?= .env` / `include $(mkenv)` / `export $(shell sed 's/=.*//' $(mkenv))`
 - Scripts live in `./scripts/`, always run from project root
 - Makefile targets delegate to scripts if logic exceeds one line
 

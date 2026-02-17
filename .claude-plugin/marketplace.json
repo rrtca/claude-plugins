@@ -1,10 +1,10 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "claude-plugins-official",
-  "description": "Directory of popular Claude Code extensions including development tools, productivity plugins, and MCP integrations",
+  "name": "rrtca-plugins",
+  "description": "Claude Code plugins by rrtca — workflow, make, and more",
   "owner": {
-    "name": "Anthropic",
-    "email": "support@anthropic.com"
+    "name": "rrtca",
+    "email": "dev10k@dev10k.app"
   },
   "plugins": [
     {

@@ -15,6 +15,10 @@
       {
         "hooks": [
           {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-start-bootstrap.sh"
+          },
+          {
             "type": "prompt",
             "prompt_file": "${CLAUDE_PLUGIN_ROOT}/hooks/session-start.md"
           }

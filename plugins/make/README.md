@@ -49,8 +49,8 @@ Single `.env` at project root. The Makefile imports it:
 
 ```makefile
 mkenv ?= .env
--include $(mkenv)
-export $(shell sed 's/=.*//' $(mkenv) 2>/dev/null)
+include $(mkenv)
+export $(shell sed 's/=.*//' $(mkenv))
 ```
 
 Overrides in subdirs use `.env-overrides-<description>` with recursive make.
