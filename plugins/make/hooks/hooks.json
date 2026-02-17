@@ -1,0 +1,39 @@
+{
+  "description": "Make plugin hooks: task loop, session resume, auto-log",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/stop-hook.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt_file": "${CLAUDE_PLUGIN_ROOT}/hooks/session-start.md"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": {
+          "tool_name": "Bash",
+          "command_pattern": "git commit"
+        },
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt_file": "${CLAUDE_PLUGIN_ROOT}/hooks/post-commit-log.md"
+          }
+        ]
+      }
+    ]
+  }
+}
