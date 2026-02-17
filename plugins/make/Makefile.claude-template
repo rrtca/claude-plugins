@@ -1,0 +1,45 @@
+# .Makefile.claude - managed by make plugin
+# Project-specific targets go below the plugin section
+
+mkenv ?= .env
+-include $(mkenv)
+export $(shell sed 's/=.*//' $(mkenv) 2>/dev/null)
+
+.PHONY: help tasks run break hold reset print-env archive
+.DEFAULT_GOAL := help
+
+help: ## Show targets
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+# Symlink convenience — created only if no Makefile exists in PWD
+Makefile:
+	@ln -s .Makefile.claude Makefile
+	@echo "Created Makefile -> .Makefile.claude symlink"
+
+tasks: ## Show ready beads (unblocked tasks)
+	@bd ready
+
+run: ## Execute task loop (driven by stop hook + bd ready)
+	@echo "Loop active — stop hook will iterate on bd ready"
+
+break: ## Stop the task loop
+	@rm -f .claude/make-loop.local.md
+	@echo "Loop stopped"
+
+hold: ## Pause a task: TASK=bd-xxxx make -f .Makefile.claude hold
+	@test -n "$(TASK)" || (echo "Usage: TASK=bd-xxxx make -f .Makefile.claude hold" && exit 1)
+	@bd update $(TASK) --status paused
+	@echo "Paused $(TASK)"
+
+reset: ## Reset all tasks to open
+	@bd ready --json 2>/dev/null | jq -r '.[].id' | xargs -I{} bd update {} --status open
+	@echo "All tasks reset to open"
+
+print-env: ## Dump environment after .env import
+	@env | sort
+
+archive: ## Sync beads to git
+	@bd sync
+	@echo "Beads synced"
+
+# ─── Project-specific targets below ───────────────────────────
