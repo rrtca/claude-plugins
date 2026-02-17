@@ -649,6 +649,16 @@
         "url": "https://github.com/firecrawl/firecrawl-claude-plugin.git"
       },
       "homepage": "https://github.com/firecrawl/firecrawl-claude-plugin.git"
+    },
+    {
+      "name": "make",
+      "description": "Universal project workflow plugin. Enforces plan-driven development via Makefile + dotenv + beads. Scaffolds .Makefile.claude, manages tasks as beads, executes via task loop.",
+      "author": {
+        "name": "rrtca"
+      },
+      "source": "./plugins/make",
+      "category": "development",
+      "homepage": "https://github.com/rrtca/claude-plugins/tree/main/plugins/make"
     }
   ]
 }
