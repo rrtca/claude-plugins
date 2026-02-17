@@ -31,6 +31,7 @@ Every project gets a consistent workflow:
 | `/make:break` | Stop the task loop |
 | `/make:hold [bead-id]` | Pause a task |
 | `/make:reset` | Reset task state |
+| `/make:do [target]` | Run a Makefile target (or list targets) |
 | `/make:print-env` | Dump env after .env import |
 | `/make:edit` | Edit .Makefile.claude |
 | `/make:edit-template` | Edit .Makefile.claude-template |
