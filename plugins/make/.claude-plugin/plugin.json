@@ -1,0 +1,7 @@
+{
+  "name": "make",
+  "description": "Universal project workflow plugin. Enforces plan-driven development via Makefile + dotenv + beads. Scaffolds .Makefile.claude, manages tasks as beads, executes via task loop.",
+  "author": {
+    "name": "rrtca"
+  }
+}
